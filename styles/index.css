@@ -1,0 +1,76 @@
+/*--- Footer ---*/
+footer {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px; /* rovnaké ako app-wrapper */
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+footer a {
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    font-size: 14px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+#create-acc {
+    background-color: rgba(184, 220, 64, 0.9);
+    color: black;
+}
+
+#create-acc:hover {
+    background-color: rgba(184, 220, 64, 1);
+}
+
+#sign-in {
+    background-color: rgba(197, 197, 197, 0.3);
+    color: white;
+
+}
+
+#sign-in:hover{
+    background-color: rgba(197, 197, 197, 0.5);
+}
+
+/*--- Body ---*/
+body {
+    background: url('../imgs/background.png') no-repeat center center fixed;
+    background-size: cover;
+    max-width: 550px;
+    margin: 0 auto;
+
+}
+
+/*--- App Wrapper ---*/
+.app-wrapper {
+    padding-top: 5px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    background: url('../imgs/heroImg.png') no-repeat center center;
+    background-size: cover;
+    box-sizing:  border-box;
+
+}
+
+.app-wrapper p{
+    color: #e2ffde;
+}
+
+h1{
+    color: white;
+}
+
+

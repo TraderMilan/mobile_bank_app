@@ -1,0 +1,610 @@
+body {
+    margin: 0 auto;
+    background-color: #f1f1f1;
+    flex-direction: column;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    min-width: 270px;
+    max-width: 768px;
+
+    font-size: clamp(12px, 2.8vw, 16px); /* responzívne písmo */
+}
+
+.app-wrapper {
+    color: #2c2c2c;
+    font-size: clamp(10px, 1.5vw, 14px); /* menší základný font v rámci app */
+    gap: 20px;
+    width: 100%;
+    max-width: 768px;
+    padding: 20px clamp(0px, 5vw, 20px);
+    box-sizing: border-box;
+}
+
+/*---profile---*/
+.profile {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.profile img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.log-out {
+    border: 1px solid #cccccc;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.log-out:hover {
+    background-color: #cccccc;
+    cursor: pointer;
+}
+
+
+/*---main - top---*/
+.switch {
+    background-color: #d0d0d0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+    height: 40px;
+    min-height:  40px;
+    border-radius: 18px;
+}
+
+.switch > div {
+    background-color: #f1f1f1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    margin: 0 4px;
+    border-radius: 18px;
+    transition: background-color 0.2s ease-in-out;
+
+}
+
+
+
+.switch div:hover{
+    cursor: pointer;
+}
+
+.balance {
+    font-size: clamp(20px, 5vw, 28px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#account-number {
+    text-align: center;
+
+}
+
+/*---switch--------------------------------------------------------*/
+
+
+.switch-wrapper {
+    width: 100%;
+    max-width: 768px; /* napríklad, uprav podľa potreby */
+    overflow: hidden;
+    height: 100px;
+    min-height: 100px;
+    transition: height 0.4s ease-in, min-height 0.4s ease-in;
+
+}
+
+.switch-body {
+    display: flex;
+    width: 200%; /* 2 položky */
+    transition: transform 0.5s ease-in-out;
+}
+
+.switch-body > div {
+    flex: 0 0 50%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+}
+
+
+#card-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#card {
+
+    width: 80%;
+    max-width: 180px;
+    height: 110px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 11px;
+    color: white;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 10;
+
+    background: url("../imgs/background.png");
+    background-size: cover; /* nech sa pozadie pekne prispôsobí */
+    background-position: center;
+}
+
+
+
+#card::before{
+    content: "";
+    background-color: rgba(28, 246, 5, 0.4);
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#card h3{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+}
+
+#verification{
+    position: absolute;
+    bottom: 20%;
+    right: 20px;
+    font-size: 7px;
+    text-align: right;
+}
+
+#code-wrapper{
+    display: flex;
+    gap: 3px;
+    justify-content: right;
+}
+
+#code-wrapper svg:hover{
+    cursor: pointer;
+}
+
+#code-wrapper svg{
+    color: #505050;
+}
+#card-switch{
+    background-color: transparent;
+}
+
+.income{
+    min-height:  180px;
+    margin-bottom: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*---switch--------------------------------------------------------*/
+
+
+.choices {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.choice {
+    background-color: #f6f6f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 70px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s, background-color 0.5s;
+}
+
+.choice:hover {
+    transform: scale(1.08);
+    background-color: #ffffff;
+    transition: transform 0.4s, background-color 0.4s;
+    cursor: pointer;
+}
+
+.choice:hover svg {
+    color: #1e1e1e;
+}
+
+.choice svg {
+    width: 20px;
+    height: 20px;
+    color: grey;
+}
+
+footer {
+    position: fixed;
+    bottom: 20px;
+    z-index: 50;
+
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    max-width: 700px;
+
+
+
+}
+
+.footer-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 0 5%;
+    background-color: #e5e5e5;
+    height: 50px;
+    border-radius: 17px;
+}
+
+.footer-wrapper > .choice {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+/*---Bottom---*/
+.bottom {
+    background: url("../imgs/background.png") center center no-repeat;
+    background-size: cover;
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    gap: 10px;
+
+    position: relative;
+    bottom: 0;
+
+    height: clamp(200px, 50vw, 220px) ;
+    transition: height 0.3s ease-in-out;
+
+
+
+
+}
+
+h3 {
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 200;
+    margin: 0;
+}
+
+.b-top-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+
+}
+
+.view-all:hover {
+    cursor: pointer;
+    color: white;
+}
+
+
+.light {
+    color: #bdbdbd;
+
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #666;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #999 transparent;
+}
+
+
+
+.transitions-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    overflow: auto;
+
+}
+
+.transition {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid rgba(189, 189, 189, 0.3);
+    padding-bottom: 20px;
+    padding-top: 20px;
+    position: relative;
+}
+
+.transition:last-of-type {
+    border-bottom: none
+}
+
+.transition svg {
+    background-color: rgba(211, 211, 211, 0.25);
+    padding: 8px;
+    border-radius: 5px;
+    color: white;
+}
+
+.price {
+    position: absolute;
+    right: 20px;
+    font-size: clamp(12px, 3vw, 16px);
+
+}
+
+/*---income graf---*/
+.income {
+    background: url("../imgs/background.png") center center no-repeat;
+    height: 200px;
+    color: white;
+    padding: 10px 5px;
+    position: relative;
+    border-radius: 15px;
+    ;
+}
+
+.total {
+    padding: 0 10px;
+}
+
+.total-sum {
+    font-size: clamp(18px, 4vw, 24px);
+}
+
+#switch-period {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 14px;
+}
+
+.progress-ring{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) rotate(-90deg);
+    bottom: 15%;
+
+}
+
+circle{
+    fill: none;
+    stroke-width: 12px;
+}
+
+.underlay{
+    stroke: #9a9a9a;
+}
+
+.progress{
+    stroke: #c1ff00;
+    stroke-dashoffset: 28;
+    stroke-width: 12px;
+
+
+
+}
+
+#credit-card{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: rotate(90deg) translateX(-50%) translateY(50%);
+    width: 40px;
+    height: 40px;
+
+}
+
+
+
+
+.income-wrapper {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c1ff00;
+    font-size: clamp(12px, 3vw, 18px)
+}
+.expanse-wrapper {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(12px, 3vw, 18px);
+    color: #afafaf;
+}
+
+.dots{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/*buttons----------------------------------------*/
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 12px;
+    color: #a6a6a6;
+    margin-bottom: -8px;
+    margin-left: 10px;
+    z-index: 2;
+    background-color: #eee;
+
+    width: fit-content;
+    padding: 0 3px
+
+}
+
+input {
+    border: 1px solid #a6a6a6;
+    background-color: #eee;
+    border-radius: 10px;
+    height: 35px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+select{
+    background-color: #eee;
+    height: 40px;
+    border-radius: 5px;
+    margin-bottom: 100px;
+    padding-left: 15px;
+}
+
+.button {
+    background: #b9b9b9;
+    color: white;
+    border: none;
+    margin: 20px 0;
+}
+
+.button:hover {
+    background: #9d9d9d;
+    cursor: pointer;
+    transition: 0.3s background;
+}
+
+.go-back {
+    color: #1a1a1a;
+    font-size: 40px;
+    font-weight: 100;
+    text-decoration: none;
+    width: fit-content;
+}
+
+
+.formular-wrapper{
+    position: fixed;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    height: 100vh;
+    padding: 20vh 0 0 0;
+    width: 100%;
+    display: none;
+}
+.formular {
+    z-index: 101;
+    background-color: rgb(238, 238, 238);
+    padding: 0 5vw;
+    border-radius: 15px;
+}
+
+/*---invoice--------------------------------------------------------*/
+
+.transaction-data-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.transaction-data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: #cecece 1px solid;
+}
+
+
+
+/*---invoice--------------------------------------------------------*/
+
+/*---other---*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+@media (max-height: 620px) {
+    body .app-wrapper:nth-child(1){
+        margin-bottom: 90px;
+    }
+}
+

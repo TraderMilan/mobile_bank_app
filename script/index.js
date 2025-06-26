@@ -1,17 +1,33 @@
-import { Account, Transaction, Client} from "./script/entities.js";
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("create-account");
 
-let client1 = new Client("Domin")
-let client2 = new Client("Marek")
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        const name = data.get("name");
 
-let account1_1 = client1.createAccount()
-let account1_2 = client1.createAccount()
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const userData = JSON.parse(localStorage.getItem("userData")) || {};
 
-let account2_1 = client2.createAccount()
-let account2_2 = client2.createAccount()
+        if (users.includes(name)) {
+            alert(`User ${name} already exists.`);
+            return;
+        }
 
-client1.depositMoney(account1_1, 500)
-client1.withdrawMoney(account1_1, 100)
-client1.transferMoney(account1_2, account1_1, 200)
+        users.push(name);
+        userData[name] = {
+            name,
+            account: {
+                accountNumber: Math.floor(Math.random() * 999999999) + 100000000,
+                balance: 0,
+                transitionHistory: []
+            }
+        };
 
-client1.getTransactionHistory(account1_1)
+        localStorage.setItem("users", JSON.stringify(users));
+        localStorage.setItem("userData", JSON.stringify(userData));
+        localStorage.setItem("currentUser", name);
 
+        window.location.href = "../pages/app.html";
+    });
+});

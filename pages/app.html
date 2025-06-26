@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank System</title>
+    <link rel="stylesheet" href="../styles/all.css">
+    <link rel="stylesheet" href="../styles/app.css">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="app-wrapper">
+
+    <div class="profile">
+        <img src="../imgs/user.jpg" alt="">
+        <div>
+            <h3>Hello, <span id="user-name"></span></h3>
+            <div class="light">Good morning!</div>
+        </div>
+        <div class="price log-out">
+            <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'
+                 xmlns:xlink='http://www.w3.org/1999/xlink'>
+                <rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+                <g transform="matrix(0.83 0 0 0.83 12 12)">
+                    <g style="">
+                        <g transform="matrix(1 0 0 1 0 0)">
+                            <path style="stroke: rgb(0,0,0); stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
+                                  transform=" translate(-12, -12)"
+                                  d="M 13 3 L 19 3 L 19 13 M 12.333 19 L 23 19 M 19 15 L 23 19 L 19 23 M 10 23 L 1 21 L 1 3 L 10 1 L 10 23 z"
+                                  stroke-linecap="round"/>
+                        </g>
+                        <g transform="matrix(1 0 0 1 -5.75 0)">
+                            <circle style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                    cx="0" cy="0" r="1.25"/>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <div class="switch">
+        <div id="account-switch">Account Balance</div>
+        <div id="card-switch">Credit Card</div>
+    </div>
+    <div class="switch-wrapper">
+        <div class="switch-body">
+            <div>
+                <div class="balance">€ 18 351,70</div>
+                <div class="light" id="account-number"></div>
+            </div>
+            <div id="card-wrapper">
+                <div id="card">
+                    <h3 style="z-index: 300">Credit Card
+                        <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'
+                             xmlns:xlink='http://www.w3.org/1999/xlink'>
+                            <rect width='24' height='24' stroke='none' fill='#2f2f2f' opacity='0'/>
+                            <g transform="matrix(0.43 0 0 0.43 12 12)">
+                                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: #000000; fill-rule: nonzero; opacity: 1;"
+                                      transform=" translate(-25, -25)"
+                                      d="M 7 9 C 4.25 9 2 11.25 2 14 L 2 36 C 2 38.75 4.25 41 7 41 L 43 41 C 45.75 41 48 38.75 48 36 L 48 14 C 48 11.25 45.75 9 43 9 Z M 7 11 L 43 11 C 44.667969 11 46 12.332031 46 14 L 46 16 L 4 16 L 4 14 C 4 12.332031 5.332031 11 7 11 Z M 4 21 L 46 21 L 46 36 C 46 37.667969 44.667969 39 43 39 L 7 39 C 5.332031 39 4 37.667969 4 36 Z M 9 24 L 9 26 L 25 26 L 25 24 Z"
+                                      stroke-linecap="round"/>
+                            </g>
+                        </svg>
+                    </h3>
+                    <div style="letter-spacing: 5px" id="card-number"></div>
+                    <h3 style="z-index: 300" id="card-name"></h3>
+                    <div id="verification">
+                        <div>Verification code</div>
+                        <div id="code-wrapper">
+                            <div style="z-index: 300" id="code"></div>
+                            <svg style="z-index: 300" id='copy' width='12' height='12' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'
+                                 xmlns:xlink='http://www.w3.org/1999/xlink'>
+                                <rect width='24' height='24' stroke='none' fill='currentColor' opacity='0'/>
+                                <g transform="matrix(1 0 0 1 12 12)">
+                                    <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: currentColor; fill-rule: nonzero; opacity: 1;"
+                                          transform=" translate(-12, -12)"
+                                          d="M 4 2 C 2.895 2 2 2.895 2 4 L 2 18 L 4 18 L 4 4 L 18 4 L 18 2 L 4 2 z M 8 6 C 6.895 6 6 6.895 6 8 L 6 20 C 6 21.105 6.895 22 8 22 L 20 22 C 21.105 22 22 21.105 22 20 L 22 8 C 22 6.895 21.105 6 20 6 L 8 6 z M 8 8 L 20 8 L 20 20 L 8 20 L 8 8 z"
+                                          stroke-linecap="round"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="choices">
+        <div id="top-up" class="choice">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="12" y1="5" x2="12" y2="19" stroke="black" stroke-width="2"/>
+                <line x1="5" y1="12" x2="19" y2="12" stroke="black" stroke-width="2"/>
+            </svg>
+            Topup
+        </div>
+
+
+        <div id="withdraw" class="choice">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="black" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round"/>
+            </svg>
+
+            Withdraw
+        </div>
+        <div id="send" class="choice">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 3L22 12L2 21L5 13L14 12L5 11L2 3Z" fill="black"/>
+            </svg>
+
+            Send
+        </div>
+        <div id="invoice" class="choice">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2" stroke="black" stroke-width="2" fill="none"/>
+                <line x1="8" y1="6" x2="16" y2="6" stroke="black" stroke-width="2"/>
+                <line x1="8" y1="10" x2="16" y2="10" stroke="black" stroke-width="2"/>
+                <line x1="8" y1="14" x2="12" y2="14" stroke="black" stroke-width="2"/>
+            </svg>
+
+            Invoice
+        </div>
+    </div>
+    <div class="income">
+        <div class="total">
+            <div class="light">Total</div>
+            <div class="total-sum">0,00 €</div>
+        </div>
+        <div id="switch-period">Today</div>
+        <div class="progress-ring">
+            <svg width="120" height="120">
+                <circle class="underlay" r="50" cx="60" cy="60"/>
+                <circle class="progress" r="50" cx="60" cy="60"/>
+            </svg>
+            <svg id='credit-card' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'
+                 xmlns:xlink='http://www.w3.org/1999/xlink'>
+                <rect width='24' height='24' stroke='none' fill='#2f2f2f' opacity='0'/>
+                <g transform="matrix(0.43 0 0 0.43 12 12)">
+                    <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: #232323; fill-rule: nonzero; opacity: 1;"
+                          transform=" translate(-25, -25)"
+                          d="M 7 9 C 4.25 9 2 11.25 2 14 L 2 36 C 2 38.75 4.25 41 7 41 L 43 41 C 45.75 41 48 38.75 48 36 L 48 14 C 48 11.25 45.75 9 43 9 Z M 7 11 L 43 11 C 44.667969 11 46 12.332031 46 14 L 46 16 L 4 16 L 4 14 C 4 12.332031 5.332031 11 7 11 Z M 4 21 L 46 21 L 46 36 C 46 37.667969 44.667969 39 43 39 L 7 39 C 5.332031 39 4 37.667969 4 36 Z M 9 24 L 9 26 L 25 26 L 25 24 Z"
+                          stroke-linecap="round"/>
+                </g>
+            </svg>
+        </div>
+        <div class="income-wrapper">+<span id="income">0</span> €</div>
+        <div class="expanse-wrapper">-<span id="expense">0</span> €</div>
+        <div class="dots">
+            <div class="dot">⬤</div>
+            <div class="dot">⬤</div>
+            <div class="dot">⬤</div>
+        </div>
+    </div>
+
+</div>
+<div class="bottom app-wrapper">
+    <div class="b-top-wrapper">
+        <h3>Transactions</h3>
+        <div class="view-all light">View all</div>
+    </div>
+    <div class="transitions-wrapper">
+
+    </div>
+</div>
+
+
+<footer >
+    <div class="footer-wrapper">
+        <a href="index.html" class="choice">
+            <svg id='Home_24' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'
+                 xmlns:xlink='http://www.w3.org/1999/xlink'>
+                <rect width='24' height='24' stroke='none' fill='currentColor' opacity='0'/>
+                <g transform="matrix(0.51 0 0 0.51 12 12)">
+                    <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: currentColor; fill-rule: nonzero; opacity: 1;"
+                          transform=" translate(-24, -23.5)"
+                          d="M 39.5 43 L 30.5 43 C 29.119 43 28 41.881 28 40.5 L 28 31.5 C 28 30.395 27.105 29.5 26 29.5 L 22 29.5 C 20.895 29.5 20 30.395 20 31.5 L 20 40.5 C 20 41.881 18.881 43 17.5 43 L 8.5 43 C 7.119 43 6 41.881 6 40.5 L 6 21.413 C 6 19.114 7.054 16.942 8.859 15.52 L 23.071 4.321 C 23.616000000000003 3.893 24.384 3.893 24.928 4.321 L 39.142 15.52 C 40.947 16.942 42 19.113 42 21.411 L 42 40.5 C 42 41.881 40.881 43 39.5 43 z"
+                          stroke-linecap="round"/>
+                </g>
+            </svg>
+        </a>
+        <a class="choice">
+            <svg id='Wallet_24' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'
+                 xmlns:xlink='http://www.w3.org/1999/xlink'>
+                <rect width='24' height='24' stroke='none' fill='none' opacity='0'/>
+                <g transform="matrix(0.77 0 0 0.77 12 12)">
+                    <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: currentColor; fill-rule: nonzero; opacity: 1;"
+                          transform=" translate(-15, -15)"
+                          d="M 5 4 C 3.3550302 4 2 5.3550302 2 7 L 2 16 L 2 18 L 2 23 C 2 24.657 3.343 26 5 26 L 25 26 C 26.657 26 28 24.657 28 23 L 28 18 L 28 16 L 28 7 C 28 5.3550302 26.64497 4 25 4 L 5 4 z M 5 6 L 25 6 C 25.56503 6 26 6.4349698 26 7 L 26 8.1875 C 25.685108 8.0739398 25.351843 8 25 8 L 5 8 C 4.6481575 8 4.3148915 8.0739398 4 8.1875 L 4 7 C 4 6.4349698 4.4349698 6 5 6 z M 5 10 L 25 10 C 25.56503 10 26 10.43497 26 11 L 26 12.1875 C 25.685108 12.07394 25.351843 12 25 12 L 5 12 C 4.6481575 12 4.3148915 12.07394 4 12.1875 L 4 11 C 4 10.43497 4.4349698 10 5 10 z M 5 14 L 25 14 C 25.56503 14 26 14.43497 26 15 L 26 16 L 21 16 C 19.774 16 18.653469 16.693062 18.105469 17.789062 L 17.894531 18.210938 C 17.345531 19.306937 16.226 20 15 20 C 13.774 20 12.653469 19.306938 12.105469 18.210938 L 11.894531 17.789062 C 11.345531 16.693063 10.226 16 9 16 L 4 16 L 4 15 C 4 14.43497 4.4349698 14 5 14 z"
+                          stroke-linecap="round"/>
+                </g>
+            </svg>
+        </a>
+        <a class="choice">
+            <svg id='Pie_Chart_24' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'
+                 xmlns:xlink='http://www.w3.org/1999/xlink'>
+                <rect width='24' height='24' stroke='none' fill='none' opacity='0'/>
+                <g transform="matrix(0.83 0 0 0.83 12 12)">
+                    <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: currentColor; fill-rule: nonzero; opacity: 1;"
+                          transform=" translate(-15, -15)"
+                          d="M 16 3 L 16 14 L 27 14 C 27 7.925 22.075 3 16 3 z M 14 5 C 7.925 5 3 9.925 3 16 C 3 22.075 7.925 27 14 27 C 20.075 27 25 22.075 25 16 L 14 16 L 14 5 z"
+                          stroke-linecap="round"/>
+                </g>
+            </svg>
+        </a>
+        <a class="choice">
+            <svg id='Transaction_24' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+                <g transform="matrix(1 0 0 1 12 12)" >
+                    <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: currentColor; fill-rule: nonzero; opacity: 1;" transform=" translate(-12, -12)" d="M 12 2 C 8.4698803 2 5.3751076 3.8338555 3.5957031 6.5957031 L 2 5 L 2 10 L 7 10 L 5.0546875 8.0546875 C 6.4299889 5.6361564 9.0193417 4 12 4 C 16.418 4 20 7.582 20 12 C 20 16.418 16.418 20 12 20 C 11.404 20 10.811328 19.934687 10.236328 19.804688 L 9.796875 21.755859 C 10.515875 21.917859 11.257 22 12 22 C 17.523 22 22 17.523 22 12 C 22 6.477 17.523 2 12 2 z M 11.712891 6 L 11.712891 7.078125 C 11.373891 7.121125 9.4765625 7.4775781 9.4765625 9.7675781 C 9.4765625 13.108578 12.935547 12.120609 12.935547 14.349609 C 12.935547 15.465609 12.213406 15.492188 12.066406 15.492188 C 11.932406 15.492188 11.052734 15.563469 11.052734 13.855469 L 9.1621094 13.855469 C 9.1621094 16.747469 11.260266 16.976531 11.572266 17.019531 L 11.572266 18 L 12.574219 18 L 12.574219 17.019531 C 12.912219 16.977531 14.824219 16.663937 14.824219 14.335938 C 14.824219 11.129938 11.366234 11.743344 11.365234 9.7773438 C 11.365234 8.6503437 11.985141 8.6152344 12.119141 8.6152344 C 12.364141 8.6152344 12.947266 8.830125 12.947266 10.203125 L 14.837891 10.203125 C 14.837891 7.576125 13.041703 7.1664687 12.720703 7.1054688 L 12.720703 6 L 11.712891 6 z M 2 12 L 2.0019531 12.158203 C 2.0129531 12.900203 2.1062969 13.639469 2.2792969 14.355469 L 4.2246094 13.888672 C 4.0856094 13.315672 4.0109531 12.721953 4.0019531 12.126953 L 4 12 L 2 12 z M 4.828125 15.552734 L 3.0371094 16.443359 C 3.3671094 17.104359 3.7702813 17.732641 4.2382812 18.306641 L 5.7890625 17.044922 C 5.4150625 16.584922 5.092125 16.082734 4.828125 15.552734 z M 7.0546875 18.289062 L 5.8164062 19.859375 C 6.3994063 20.318375 7.0322188 20.71325 7.6992188 21.03125 L 8.5605469 19.226562 C 8.0265469 18.971562 7.5206875 18.656063 7.0546875 18.289062 z" stroke-linecap="round" />
+                </g>
+            </svg>
+        </a>
+    </div>
+</footer>
+<div id="deposit" class="app-wrapper formular-wrapper">
+    <div class="formular">
+        <a href="" class="go-back form-go-back">‹</a>
+        <h2>Deposit money</h2>
+        <form id="add-money">
+
+            <label for="amount">Amount</label>
+            <input id="amount" type="number" name="amount" required min="1">
+
+            <button type="submit" class="button">Send</button>
+        </form>
+    </div>
+</div>
+<div id="withdraw-form" class="app-wrapper formular-wrapper">
+    <div class="formular">
+        <a href="" class="go-back form-go-back">‹</a>
+        <h2>Withdraw money</h2>
+        <form id="withdraw-money">
+
+            <label for="amount-w">Amount</label>
+            <input id="amount-w" type="number" name="amount-w" required min="1">
+
+            <label for="v-code">Verification Code</label>
+            <input id="v-code" type="number" name="v-code" required minlength="3" maxlength="3">
+
+            <button type="submit" class="button">Send</button>
+        </form>
+    </div>
+</div>
+<div id="send-form" class="app-wrapper formular-wrapper">
+    <div class="formular">
+        <a href="" class="go-back form-go-back">‹</a>
+        <h2>Send money</h2>
+        <form id="send-money">
+
+            <label for="amount-s">Amount</label>
+            <input id="amount-s" type="number" name="amount-s" required min="1">
+
+            <label for="send-to">Send to:</label>
+            <select name="send-to" id="send-to">
+                <option value=""></option>
+            </select>
+
+            <button type="submit" class="button">Send</button>
+        </form>
+    </div>
+</div>
+<div id="invoice-wrapper" class="app-wrapper formular-wrapper">
+    <div class="formular">
+        <a href="" class="go-back form-go-back">‹</a>
+        <h2>Invoice</h2>
+        <h4 class="light">Transaction history</h4>
+
+
+    </div>
+</div>
+
+<script src="../script/app.js" type="module"></script>
+</body>
+</html>
