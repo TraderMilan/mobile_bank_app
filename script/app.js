@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateGraph(income, expense) {
         const progress = document.querySelector(".progress");
+
         const length = progress.getTotalLength();
         const ratio = income / (income + expense || 1);
 
@@ -69,11 +70,23 @@ document.addEventListener("DOMContentLoaded", () => {
         progress.style.strokeDashoffset = `${length * (1 - ratio)}px`;
     }
 
+    function updateGraphAll(incomeAll, expenseAll) {
+        const progressAll = document.querySelector(".all");
+
+        const length = progressAll.getTotalLength();
+        const ratio = incomeAll / (incomeAll + expenseAll || 1);
+
+        progressAll.style.transition = "stroke-dashoffset 1.5s ease";
+        progressAll.style.strokeDasharray = `${length}px`;
+        progressAll.style.strokeDashoffset = `${length * (1 - ratio)}px`;
+    }
+
+
     function calculateProfitExpanse(account, time) {
         let income = 0, expanse = 0;
         let today = new Date();
         let transactions;
-        if (time === "today"){
+        if (time === "today") {
             transactions = account.transitionHistory.filter(t => {
                 let tDate = new Date(t.date);
                 return tDate.getFullYear() === today.getFullYear() &&
@@ -137,10 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return transactionElement
     }
 
-    
+
     // LOADING
 
-    function loading(current){
+    function loading(current) {
         const blocker = document.createElement("div");
         blocker.classList.add("loading-blocker");
         document.body.appendChild(blocker);
@@ -153,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
             loadingGif.style.display = "none";
             loadingDone.style.display = "flex";
             loadingDone.classList.add("done");
-            setTimeout(()=>{
+            setTimeout(() => {
                 loadingDone.style.display = "none";
                 depositBody.style.display = "none";
                 withdrawBody.style.display = "none";
@@ -188,6 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
         income += amount;
         updateUI();
         updateGraph(income, expense);
+        updateGraphAll(allIncome, allExpanse)
         saveData();
 
         printTransactionHistory(account);
@@ -214,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Not enough money");
             return;
         }
-        if (+v_code !== +copyVerificationCode){
+        if (+v_code !== +copyVerificationCode) {
             alert(`Wrong verification code, check your card!`)
             return;
         }
@@ -223,6 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
         expense += amount;
         updateUI();
         updateGraph(income, expense);
+        updateGraphAll(allIncome, allExpanse)
         saveData();
         printTransactionHistory(account);
     });
@@ -280,6 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
         expense += amount;
         updateUI();
         updateGraph(income, expense);
+        updateGraphAll(allIncome, allExpanse)
 
         printTransactionHistory(account);
     });
@@ -291,9 +307,9 @@ document.addEventListener("DOMContentLoaded", () => {
         account.transitionHistory.forEach(t => {
             text += t.getInfo() + '\n'
         })
-            navigator.clipboard.writeText(text)
-                .then(() => alert("Invoice skopírovaný!"))
-                .catch(() => alert("Error pri kopírovaní"));
+        navigator.clipboard.writeText(text)
+            .then(() => alert("Invoice skopírovaný!"))
+            .catch(() => alert("Error pri kopírovaní"));
     })
 
 
@@ -356,6 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         switchBody.style.transform = `translateX(-${index * 50}%)`;
     }
+
     let startX = 0;
     let endX = 0;
 
@@ -418,18 +435,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-
-
-
-
     //SWITCH PERIOD
 
-    let switchBodyGraph =  document.getElementById("income-body");
+    let switchBodyGraph = document.getElementById("income-body");
     let dots = Array.from(document.querySelectorAll('.dots > div'))
 
 
     let indexG = 0;
-    function switchSides(i){
+
+    function switchSides(i) {
         indexG = i;
         switchBodyGraph.style.transform = `translateX(-${indexG * 50}%)`;
         dots.forEach((dot, i) => {
@@ -458,18 +472,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     //VIEW ALL
     const viewAllButton = document.querySelector(".view-all");
     const bottomWrapper = document.querySelector('.bottom');
@@ -479,7 +481,7 @@ document.addEventListener("DOMContentLoaded", () => {
             bottomWrapper.style.height = 400 + "px";
             bottomWrapper.style.maxHeight = 80 + "vh";
             viewAllButton.innerHTML = 'Hide'
-            setTimeout(() =>{
+            setTimeout(() => {
                 window.scrollTo({
                     top: document.body.scrollHeight,
                     behavior: 'smooth'
@@ -492,40 +494,56 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
+    // SMOOTH SCROLL
+    function smoothScrollTo(targetY, duration = 500) {
+        const startY = window.scrollY || window.pageYOffset;
+        const distance = targetY - startY;
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (!startTime) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+            // jednoduchá ease funkcia (easeInOutQuad)
+            const ease = progress < 0.5
+                ? 2 * progress * progress
+                : -1 + (4 - 2 * progress) * progress;
+
+            window.scrollTo(0, startY + distance * ease);
+
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            }
+        }
+
+        requestAnimationFrame(animation);
+    }
+
+
+
+
     //FOOTER NAV
     const goToWallet = document.getElementById("goToWallet");
     const goToGraph = document.getElementById("goToGraph");
     const goToTransactions = document.getElementById("goToTransactions");
     goToWallet.addEventListener("click", (e) => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        smoothScrollTo(0, 500)
     })
     goToGraph.addEventListener("click", (e) => {
-        window.scrollTo({
-            top: 200,
-            behavior: 'smooth'
-        })
+        smoothScrollTo(200, 500)
     })
 
     goToTransactions.addEventListener('click', (e) => {
         bottomWrapper.style.height = 400 + "px";
         bottomWrapper.style.maxHeight = 80 + "vh";
         viewAllButton.innerHTML = 'Hide'
-        setTimeout(() =>{
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
-            });
-        }, 500)
+        smoothScrollTo(1000, 1000)
     })
-
-
 
 
     switchSlide(index)
     updateGraph(income, expense);
+    updateGraphAll(allIncome, allExpanse)
     updateUI();
     printTransactionHistory(account)
 });

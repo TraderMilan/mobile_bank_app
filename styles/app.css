@@ -409,11 +409,12 @@ h3 {
     background: url("../imgs/background.png") center center no-repeat;
     height: 200px;
     color: white;
-    padding: 10px 5px;
+    padding: 10px 10px;
     position: relative;
     border-radius: 15px;
     width: 100%;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 
@@ -435,6 +436,7 @@ h3 {
     position: relative;
     height: 100%;
     transition: transform 0.5s ease;
+    /*transform:  translateX(-50%);*/
 }
 
 
