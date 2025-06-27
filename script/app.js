@@ -23,13 +23,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const accountNumberElement = document.getElementById("account-number");
     accountNumberElement.innerText = "SK" + account.accountNumber;
 
-    const {income: calcIncome, expanse: calcExpense} = calculateProfitExpanse(account);
-    let income = calcIncome;
-    let expense = calcExpense;
+    const {income: todayIncome, expanse: todayExpanse} = calculateProfitExpanse(account, "today");
+    let income = todayIncome;
+    let expense = todayExpanse;
+    const {income: allIncomeData, expanse: allExpanseData} = calculateProfitExpanse(account, "all");
+    let allIncome = allIncomeData;
+    let allExpanse = allExpanseData;
+
+    const allIncomeElement = document.getElementById("income-total");
+    const allExpenseElement = document.getElementById("expense-total");
+    const totalSum = document.getElementById("total-sum");
+
 
     const incomeElement = document.getElementById("income");
     const expenseElement = document.getElementById("expense");
-    const totalSum = document.getElementById("today-sum");
+    const todaySum = document.getElementById("today-sum");
+
     const balanceElement = document.querySelector(".balance");
 
 
@@ -43,7 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateUI() {
         incomeElement.innerText = income;
         expenseElement.innerText = expense;
-        totalSum.innerText = (income - expense) + "€";
+        allIncomeElement.innerText = allIncome;
+        allExpenseElement.innerText = allExpanse;
+        todaySum.innerText = (income - expense) + "€";
+        totalSum.innerText = (allIncome - allExpanse) + "€";
         balanceElement.innerText = account.balance + "€";
     }
 
@@ -57,10 +69,23 @@ document.addEventListener("DOMContentLoaded", () => {
         progress.style.strokeDashoffset = `${length * (1 - ratio)}px`;
     }
 
-    function calculateProfitExpanse(account) {
+    function calculateProfitExpanse(account, time) {
         let income = 0, expanse = 0;
+        let today = new Date();
+        let transactions;
+        if (time === "today"){
+            transactions = account.transitionHistory.filter(t => {
+                let tDate = new Date(t.date);
+                return tDate.getFullYear() === today.getFullYear() &&
+                    tDate.getMonth() === today.getMonth() &&
+                    tDate.getDate() === today.getDate();
+            })
+        } else {
+            transactions = account.transitionHistory
+        }
 
-        for (let transaction of account.transitionHistory) {
+
+        for (let transaction of transactions) {
             if (transaction.type === "income") {
                 income += transaction.amount;
             }
@@ -260,6 +285,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     //INVOICE
+    const downloadButton = document.getElementById("downloadInvoice");
+    downloadButton.addEventListener("click", (e) => {
+        let text = "";
+        account.transitionHistory.forEach(t => {
+            text += t.getInfo() + '\n'
+        })
+            navigator.clipboard.writeText(text)
+                .then(() => alert("Invoice skopírovaný!"))
+                .catch(() => alert("Error pri kopírovaní"));
+    })
+
+
     const invoiceButton = document.getElementById("invoice");
     const invoiceWrapper = document.getElementById("invoice-wrapper");
     let invoiceBody = document.querySelector("#invoice-wrapper .formular ");

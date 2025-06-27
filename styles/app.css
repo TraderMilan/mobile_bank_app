@@ -443,7 +443,7 @@ h3 {
     padding: 0 10px;
 }
 
-#today-sum {
+#today-sum, #total-sum {
     font-size: clamp(18px, 4vw, 24px);
 }
 
@@ -597,6 +597,7 @@ select{
     display: none;
 }
 .formular {
+    position: relative;
     z-index: 101;
     background-color: rgb(238, 238, 238);
     padding: 0 5vw;
@@ -604,8 +605,19 @@ select{
     animation: formAppear 0.4s ease-in-out;
     overflow: auto;
 }
-#invoice-wrapper{
+#downloadInvoice{
+    position: absolute;
+    z-index: 101;
+    right: 20px;
+    top: 20px;
+    color: #5b5b5b;
+    transition: 0.3s color, 0.3s transform;
+}
 
+#downloadInvoice:hover{
+    cursor: pointer;
+    transform:  scale(1.1);
+    color: #1a1a1a;
 }
 
 @keyframes formAppear {
