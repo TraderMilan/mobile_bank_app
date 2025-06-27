@@ -72,7 +72,7 @@ body {
     height: 32px;
     margin: 0 4px;
     border-radius: 18px;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.5s ease-in-out;
 
 }
 
@@ -150,9 +150,12 @@ body {
     background: url("../imgs/background.png");
     background-size: cover; /* nech sa pozadie pekne prispôsobí */
     background-position: center;
+    transition: transform 0.5s ease-in-out;
 }
 
-
+#card:hover{
+    transform: scale(1.1);
+}
 
 #card::before{
     content: "";
@@ -306,10 +309,7 @@ footer {
     bottom: 0;
 
     height: clamp(200px, 50vw, 220px) ;
-    transition: height 0.3s ease-in-out;
-
-
-
+    transition: height 0.6s ease-in-out;
 
 }
 
@@ -412,21 +412,45 @@ h3 {
     padding: 10px 5px;
     position: relative;
     border-radius: 15px;
-    ;
+    width: 100%;
+    overflow: hidden;
 }
+
+
+
+
+
+
+
+
+
+#today, #total{
+    width: 100%;
+    position: relative;
+}
+
+#income-body{
+    width: 200%;
+    display: flex;
+    position: relative;
+    height: 100%;
+    transition: transform 0.5s ease;
+}
+
+
 
 .total {
     padding: 0 10px;
 }
 
-.total-sum {
+#today-sum {
     font-size: clamp(18px, 4vw, 24px);
 }
 
-#switch-period {
+.switch-period {
     position: absolute;
     right: 15px;
-    top: 15px;
+    top: 10px;
     font-size: 14px;
 }
 
@@ -494,6 +518,14 @@ circle{
     bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
+    color: #15330f;
+    transition: transform 0.5s, color 0.5s;
+}
+
+.current-dot{
+    color: white;
+    transform: scale(1.2);
+    transition: transform 0.5s, color 0.5s;
 }
 
 /*buttons----------------------------------------*/
@@ -560,7 +592,7 @@ select{
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
     height: 100vh;
-    padding: 20vh 0 0 0;
+    padding: 20vh 0 10vh 0 ;
     width: 100%;
     display: none;
 }
@@ -569,6 +601,22 @@ select{
     background-color: rgb(238, 238, 238);
     padding: 0 5vw;
     border-radius: 15px;
+    animation: formAppear 0.4s ease-in-out;
+    overflow: auto;
+}
+#invoice-wrapper{
+
+}
+
+@keyframes formAppear {
+    0%{
+        transform: translateY(-50vh);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0vh);
+        opacity: 1;
+    }
 }
 
 /*---invoice--------------------------------------------------------*/
@@ -591,6 +639,12 @@ select{
 /*---invoice--------------------------------------------------------*/
 
 /*---other---*/
+
+html, body {
+    scroll-behavior: smooth;
+}
+
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -601,6 +655,57 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+/*-----loading-----*/
+.loading-blocker {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0); /* ak chceš, môžeš dať aj trochu tmavé */
+    z-index: 9999;
+    pointer-events: all;
+}
+
+.loading{
+    display: flex;
+    justify-content: center;
+
+}
+.loading img{
+    width: 80px;
+    display: none;
+}
+
+.loading svg{
+    color: #006aff;
+    width: 80px;
+    height: 80px;
+    display: none;
+}
+
+.done{
+    animation: done 0.4s ease-in-out;
+}
+
+@keyframes done {
+    0%{
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    60%{
+        transform: scale(1.2);
+    }
+
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/*-----loading-----*/
+
+
+
+
 
 @media (max-height: 620px) {
     body .app-wrapper:nth-child(1){

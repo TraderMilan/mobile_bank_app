@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const incomeElement = document.getElementById("income");
     const expenseElement = document.getElementById("expense");
-    const totalSum = document.querySelector(".total-sum");
+    const totalSum = document.getElementById("today-sum");
     const balanceElement = document.querySelector(".balance");
 
 
@@ -112,6 +112,32 @@ document.addEventListener("DOMContentLoaded", () => {
         return transactionElement
     }
 
+    
+    // LOADING
+
+    function loading(current){
+        const blocker = document.createElement("div");
+        blocker.classList.add("loading-blocker");
+        document.body.appendChild(blocker);
+
+        let loadingGif = current.querySelector('.loadingG')
+        let loadingDone = current.querySelector(".loadingDone");
+
+        loadingGif.style.display = "flex";
+        setTimeout(() => {
+            loadingGif.style.display = "none";
+            loadingDone.style.display = "flex";
+            loadingDone.classList.add("done");
+            setTimeout(()=>{
+                loadingDone.style.display = "none";
+                depositBody.style.display = "none";
+                withdrawBody.style.display = "none";
+                sendBody.style.display = "none";
+                blocker.remove();
+            }, 1200)
+        }, 1500)
+    }
+
 
     // Deposit
     const topUp = document.getElementById("top-up");
@@ -132,12 +158,13 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        loading(depositForm)
         user.depositMoney(amount);
         income += amount;
         updateUI();
         updateGraph(income, expense);
         saveData();
-        depositBody.style.display = "none";
+
         printTransactionHistory(account);
     });
 
@@ -167,11 +194,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        loading(withdrawForm);
         expense += amount;
         updateUI();
         updateGraph(income, expense);
         saveData();
-        withdrawBody.style.display = "none";
         printTransactionHistory(account);
     });
 
@@ -224,11 +251,11 @@ document.addEventListener("DOMContentLoaded", () => {
         userData[recipientName] = recipient.exportData();
         localStorage.setItem("userData", JSON.stringify(userData));
 
+        loading(sendForm)
         expense += amount;
         updateUI();
         updateGraph(income, expense);
 
-        sendBody.style.display = "none";
         printTransactionHistory(account);
     });
 
@@ -292,31 +319,119 @@ document.addEventListener("DOMContentLoaded", () => {
 
         switchBody.style.transform = `translateX(-${index * 50}%)`;
     }
+    let startX = 0;
+    let endX = 0;
+
+    const switchBody = document.querySelector('.switch-body');
+
+    switchBody.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
+
+    switchBody.addEventListener('touchmove', (e) => {
+        endX = e.touches[0].clientX;
+    });
+
+    switchBody.addEventListener('touchend', () => {
+        let diff = endX - startX;
+        if (Math.abs(diff) > 50) { // minimálna vzdialenosť swipu
+            if (diff > 0) {
+                // swipe right → prepni na index 0
+                switchSlide(0);
+                updateSwitchUI(0);
+            } else {
+                // swipe left → prepni na index 1
+                switchSlide(1);
+                updateSwitchUI(1);
+            }
+        }
+    });
+
+
+    function updateSwitchUI(i) {
+        let firstDiv = document.querySelector('.switch div:nth-child(1)');
+        let secondDiv = document.querySelector('.switch div:nth-child(2)');
+
+        if (i === 0) {
+            firstDiv.style.backgroundColor = "#f1f1f1";
+            secondDiv.style.backgroundColor = "transparent";
+            switchWrapper.style.height = "100px";
+            switchWrapper.style.minHeight = "100px";
+        } else {
+            firstDiv.style.backgroundColor = "transparent";
+            secondDiv.style.backgroundColor = "#f1f1f1";
+            switchWrapper.style.height = "160px";
+            switchWrapper.style.minHeight = "160px";
+        }
+    }
 
 
     const switchWrapper = document.querySelector('.switch-wrapper');
     const accountSwitchButton = document.getElementById("account-switch");
     const cardSwitchButton = document.getElementById("card-switch");
 
-    cardSwitchButton.addEventListener("click", (e) => {
-        switchSlide(1)
-        let current = document.querySelector('.switch div:nth-child(1)');
-        current.style.backgroundColor = "transparent";
-        let other = document.querySelector('.switch div:nth-child(2)');
-        other.style.backgroundColor = "#f1f1f1";
-        switchWrapper.style.height = 160 + "px"
-        switchWrapper.style.minHeight = 160 + "px";
+    cardSwitchButton.addEventListener("click", () => {
+        switchSlide(1);
+        updateSwitchUI(1);
+    });
 
+    accountSwitchButton.addEventListener("click", () => {
+        switchSlide(0);
+        updateSwitchUI(0);
+    });
+
+
+
+
+
+
+    //SWITCH PERIOD
+
+    let switchBodyGraph =  document.getElementById("income-body");
+    let dots = Array.from(document.querySelectorAll('.dots > div'))
+
+
+    let indexG = 0;
+    function switchSides(i){
+        indexG = i;
+        switchBodyGraph.style.transform = `translateX(-${indexG * 50}%)`;
+        dots.forEach((dot, i) => {
+            dot.classList.toggle("current-dot", i === indexG);
+        })
+    }
+
+
+    let startGX = 0, endGX = 0;
+
+    switchBodyGraph.addEventListener("touchstart", (e) => {
+        startGX = e.touches[0].clientX;
     })
-    accountSwitchButton.addEventListener("click", (e) => {
-        switchSlide(0)
-        let current = document.querySelector('.switch div:nth-child(2)');
-        current.style.backgroundColor = "transparent";
-        let other = document.querySelector('.switch div:nth-child(1)');
-        other.style.backgroundColor = "#f1f1f1";
-        switchWrapper.style.height = 100 + "px"
-        switchWrapper.style.minHeight = 100 + "px"
+    switchBodyGraph.addEventListener("touchmove", (e) => {
+        endGX = e.touches[0].clientX;
     })
+    switchBodyGraph.addEventListener("touchend", (e) => {
+        let diff = endGX - startGX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                switchSides(0);
+            } else {
+                switchSides(1);
+            }
+        }
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //VIEW ALL
     const viewAllButton = document.querySelector(".view-all");
@@ -332,13 +447,44 @@ document.addEventListener("DOMContentLoaded", () => {
                     top: document.body.scrollHeight,
                     behavior: 'smooth'
                 });
-            }, 300)
+            }, 500)
 
         } else {
             viewAllButton.innerHTML = 'View all'
             bottomWrapper.style.height = 200 + "px";
         }
     })
+
+    //FOOTER NAV
+    const goToWallet = document.getElementById("goToWallet");
+    const goToGraph = document.getElementById("goToGraph");
+    const goToTransactions = document.getElementById("goToTransactions");
+    goToWallet.addEventListener("click", (e) => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    })
+    goToGraph.addEventListener("click", (e) => {
+        window.scrollTo({
+            top: 200,
+            behavior: 'smooth'
+        })
+    })
+
+    goToTransactions.addEventListener('click', (e) => {
+        bottomWrapper.style.height = 400 + "px";
+        bottomWrapper.style.maxHeight = 80 + "vh";
+        viewAllButton.innerHTML = 'Hide'
+        setTimeout(() =>{
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        }, 500)
+    })
+
+
 
 
     switchSlide(index)
