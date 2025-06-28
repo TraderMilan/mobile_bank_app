@@ -54,9 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
         expenseElement.innerText = expense;
         allIncomeElement.innerText = allIncome;
         allExpenseElement.innerText = allExpanse;
-        todaySum.innerText = (income - expense) + "€";
-        totalSum.innerText = (allIncome - allExpanse) + "€";
-        balanceElement.innerText = account.balance + "€";
+        todaySum.innerText = (income - expense) + " €";
+        totalSum.innerText = (allIncome - allExpanse) + " €";
+        balanceElement.innerText = account.balance + " €";
     }
 
     function updateGraph(income, expense) {
